@@ -7,6 +7,16 @@
         </div>
         <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
         <p>{{ post.text|linebreaksbr }}</p>
+        <ul>
+{#    <li data-id="{{ post.id }}" data-type="post" data-action="like" title="Нравится">#}
+{#        <span class="glyphicon glyphicon-thumbs-up"></span>#}
+{#        <span data-count="like">{{ like_obj.votes.likes.count }}</span>#}
+{#    </li>#}
+{#    <li data-id="{{ post.id }}" data-type="post" data-action="dislike" title="Не нравится">#}
+{#        <span class="glyphicon glyphicon-thumbs-down"></span>#}
+{#        <span data-count="dislike">{{ like_obj.votes.dislikes.count }}</span>#}
+{#    </li>#}
+</ul>
         <a href="{% url 'post_detail' pk=post.pk %}">Комментарии: {{ post.approved_comments.count }}</a>
     </div>
 {% endfor %}

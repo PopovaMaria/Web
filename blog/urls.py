@@ -1,6 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import path
 from . import views
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+from django.conf.urls import url
+
+from . import views
+from .models import LikeDislike
+from blog.models import Post, Comment
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
@@ -14,4 +20,24 @@ urlpatterns = [
     path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
 
-]
+    path('post/<int:pk>/like', views.VotesView.as_view(model=Post, vote_type=LikeDislike.LIKE), name='like_post'),
+    path('post/<int:pk>/dislike', views.VotesView.as_view(model=Post, vote_type=LikeDislike.DISLIKE), name='dislike_post'),
+# path(r'^article/(?P<pk>\d+)/like/$',
+#         login_required(views.VotesView.as_view(model=Post, vote_type=LikeDislike.LIKE)),
+#         name='article_like'),
+#     path(r'^article/(?P<pk>\d+)/dislike/$',
+#         login_required(views.VotesView.as_view(model=Post, vote_type=LikeDislike.DISLIKE)),
+#         name='article_dislike'),
+#     path(r'^comment/(?P<pk>\d+)/like/$',
+#         login_required(views.VotesView.as_view(model=Comment, vote_type=LikeDislike.LIKE)),
+#         name='comment_like'),
+#     path(r'^comment/(?P<pk>\d+)/dislike/$',
+#         login_required(views.VotesView.as_view(model=Comment, vote_type=LikeDislike.DISLIKE)),
+#         name='comment_dislike'),
+ ]
+
+
+
+
+
+
